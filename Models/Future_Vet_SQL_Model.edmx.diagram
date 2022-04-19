@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4bb31f5d96ec45898311970e4c7ee7e2" Name="Diagram1">
+        <EntityTypeShape EntityType="SQLModel.Animal_Breed" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQLModel.Animal_Type" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQLModel.Invoice" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQLModel.Log" Width="1.5" PointX="8" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQLModel.Pet_Details" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQLModel.Pet_Owner" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQLModel.Pet_Visit" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQLModel.Receipt" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQLModel.sysdiagram" Width="1.5" PointX="7.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQLModel.User" Width="1.5" PointX="5.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQLModel.Vet" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="SQLModel.FK_Pet_Details_Animal_Breed" ManuallyRouted="false" />
+        <AssociationConnector Association="SQLModel.FK_Pet_Details_Animal_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="SQLModel.FK_Invoice_Pet_Owner" ManuallyRouted="false" />
+        <AssociationConnector Association="SQLModel.FK_Receipt_Invoice" ManuallyRouted="false" />
+        <AssociationConnector Association="SQLModel.FK_Log_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SQLModel.FK_Pet_Details_Pet_Owner" ManuallyRouted="false" />
+        <AssociationConnector Association="SQLModel.FK_Pet_Visit_Pet_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="SQLModel.FK_Pet_Visit_Vet" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SQLModel.AuditLog" Width="1.5" PointX="7.375" PointY="5.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,728 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SQLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Animal_Breed">
+          <Key>
+            <PropertyRef Name="IDBreed" />
+          </Key>
+          <Property Name="IDBreed" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Breed" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Animal_Type">
+          <Key>
+            <PropertyRef Name="IDAnimal_Type" />
+          </Key>
+          <Property Name="IDAnimal_Type" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Animal_Type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AuditLog">
+          <Key>
+            <PropertyRef Name="AuditID" />
+          </Key>
+          <Property Name="AuditID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="255" />
+          <Property Name="IPAddress" Type="varchar" MaxLength="50" />
+          <Property Name="AreaAccessed" Type="varchar" MaxLength="255" />
+          <Property Name="Timestamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="IDInvoice" />
+          </Key>
+          <Property Name="IDInvoice" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceAmount" Type="money" />
+          <Property Name="InvoiceDate" Type="date" />
+          <Property Name="Receipts" Type="money" />
+          <Property Name="Balance" Type="money" />
+          <Property Name="IDOwner" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="IDLog" />
+          </Key>
+          <Property Name="IDLog" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Thread" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Level" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Logger" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="4000" Nullable="false" />
+          <Property Name="IDUser" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Pet_Details">
+          <Key>
+            <PropertyRef Name="IDPet" />
+          </Key>
+          <Property Name="IDPet" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pet_Name" Type="varchar" MaxLength="255" />
+          <Property Name="IDOwner" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IDBreed" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Birthdate" Type="date" />
+          <Property Name="IDAnimal_Type" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TagNumber" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Pet_Owner">
+          <Key>
+            <PropertyRef Name="IDOwner" />
+          </Key>
+          <Property Name="IDOwner" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Postal" Type="nvarchar" MaxLength="255" />
+          <Property Name="Id_Number" Type="nvarchar" MaxLength="255" />
+          <Property Name="Account" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Pet_Visit">
+          <Key>
+            <PropertyRef Name="IDVisit" />
+          </Key>
+          <Property Name="IDVisit" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VisitDate" Type="date" />
+          <Property Name="VisitTime" Type="time" Precision="7" />
+          <Property Name="IDPet" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IDVet" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Summary" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="IDReceipt" />
+          </Key>
+          <Property Name="IDReceipt" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiptDate" Type="date" />
+          <Property Name="ReceiptAmount" Type="money" />
+          <Property Name="CaptureDate" Type="date" />
+          <Property Name="IDInvoice" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Vet">
+          <Key>
+            <PropertyRef Name="IDVet" />
+          </Key>
+          <Property Name="IDVet" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="255" />
+          <Property Name="Id_Number" Type="nvarchar" MaxLength="255" />
+          <Property Name="License" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_Invoice_Pet_Owner">
+          <End Role="Pet_Owner" Type="Self.Pet_Owner" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pet_Owner">
+              <PropertyRef Name="IDOwner" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="IDOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Log_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Details_Animal_Breed">
+          <End Role="Animal_Breed" Type="Self.Animal_Breed" Multiplicity="0..1" />
+          <End Role="Pet_Details" Type="Self.Pet_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal_Breed">
+              <PropertyRef Name="IDBreed" />
+            </Principal>
+            <Dependent Role="Pet_Details">
+              <PropertyRef Name="IDBreed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Details_Animal_Type">
+          <End Role="Animal_Type" Type="Self.Animal_Type" Multiplicity="0..1" />
+          <End Role="Pet_Details" Type="Self.Pet_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal_Type">
+              <PropertyRef Name="IDAnimal_Type" />
+            </Principal>
+            <Dependent Role="Pet_Details">
+              <PropertyRef Name="IDAnimal_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Details_Pet_Owner">
+          <End Role="Pet_Owner" Type="Self.Pet_Owner" Multiplicity="0..1" />
+          <End Role="Pet_Details" Type="Self.Pet_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pet_Owner">
+              <PropertyRef Name="IDOwner" />
+            </Principal>
+            <Dependent Role="Pet_Details">
+              <PropertyRef Name="IDOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Visit_Pet_Details">
+          <End Role="Pet_Details" Type="Self.Pet_Details" Multiplicity="0..1" />
+          <End Role="Pet_Visit" Type="Self.Pet_Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pet_Details">
+              <PropertyRef Name="IDPet" />
+            </Principal>
+            <Dependent Role="Pet_Visit">
+              <PropertyRef Name="IDPet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Visit_Vet">
+          <End Role="Vet" Type="Self.Vet" Multiplicity="0..1" />
+          <End Role="Pet_Visit" Type="Self.Pet_Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vet">
+              <PropertyRef Name="IDVet" />
+            </Principal>
+            <Dependent Role="Pet_Visit">
+              <PropertyRef Name="IDVet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Invoice">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="IDInvoice" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="IDInvoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SQLModelStoreContainer">
+          <EntitySet Name="Animal_Breed" EntityType="Self.Animal_Breed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Animal_Type" EntityType="Self.Animal_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pet_Details" EntityType="Self.Pet_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pet_Owner" EntityType="Self.Pet_Owner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pet_Visit" EntityType="Self.Pet_Visit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vet" EntityType="Self.Vet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Invoice_Pet_Owner" Association="Self.FK_Invoice_Pet_Owner">
+            <End Role="Pet_Owner" EntitySet="Pet_Owner" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Log_Users" Association="Self.FK_Log_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Details_Animal_Breed" Association="Self.FK_Pet_Details_Animal_Breed">
+            <End Role="Animal_Breed" EntitySet="Animal_Breed" />
+            <End Role="Pet_Details" EntitySet="Pet_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Details_Animal_Type" Association="Self.FK_Pet_Details_Animal_Type">
+            <End Role="Animal_Type" EntitySet="Animal_Type" />
+            <End Role="Pet_Details" EntitySet="Pet_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Details_Pet_Owner" Association="Self.FK_Pet_Details_Pet_Owner">
+            <End Role="Pet_Owner" EntitySet="Pet_Owner" />
+            <End Role="Pet_Details" EntitySet="Pet_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Visit_Pet_Details" Association="Self.FK_Pet_Visit_Pet_Details">
+            <End Role="Pet_Details" EntitySet="Pet_Details" />
+            <End Role="Pet_Visit" EntitySet="Pet_Visit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Visit_Vet" Association="Self.FK_Pet_Visit_Vet">
+            <End Role="Vet" EntitySet="Vet" />
+            <End Role="Pet_Visit" EntitySet="Pet_Visit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Invoice" Association="Self.FK_Receipt_Invoice">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SQLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Animal_Breed">
+          <Key>
+            <PropertyRef Name="IDBreed" />
+          </Key>
+          <Property Name="IDBreed" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Breed" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pet_Details" Relationship="Self.FK_Pet_Details_Animal_Breed" FromRole="Animal_Breed" ToRole="Pet_Details" />
+        </EntityType>
+        <EntityType Name="Animal_Type">
+          <Key>
+            <PropertyRef Name="IDAnimal_Type" />
+          </Key>
+          <Property Name="IDAnimal_Type" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Animal_Type1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pet_Details" Relationship="Self.FK_Pet_Details_Animal_Type" FromRole="Animal_Type" ToRole="Pet_Details" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="IDInvoice" />
+          </Key>
+          <Property Name="IDInvoice" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="0" />
+          <Property Name="Receipts" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IDOwner" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pet_Owner" Relationship="Self.FK_Invoice_Pet_Owner" FromRole="Invoice" ToRole="Pet_Owner" />
+          <NavigationProperty Name="Receipts1" Relationship="Self.FK_Receipt_Invoice" FromRole="Invoice" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="IDLog" />
+          </Key>
+          <Property Name="IDLog" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Thread" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Level" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Logger" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDUser" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Log_Users" FromRole="Log" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Pet_Details">
+          <Key>
+            <PropertyRef Name="IDPet" />
+          </Key>
+          <Property Name="IDPet" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pet_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IDOwner" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IDBreed" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Birthdate" Type="DateTime" Precision="0" />
+          <Property Name="IDAnimal_Type" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TagNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Animal_Breed" Relationship="Self.FK_Pet_Details_Animal_Breed" FromRole="Pet_Details" ToRole="Animal_Breed" />
+          <NavigationProperty Name="Animal_Type" Relationship="Self.FK_Pet_Details_Animal_Type" FromRole="Pet_Details" ToRole="Animal_Type" />
+          <NavigationProperty Name="Pet_Owner" Relationship="Self.FK_Pet_Details_Pet_Owner" FromRole="Pet_Details" ToRole="Pet_Owner" />
+          <NavigationProperty Name="Pet_Visit" Relationship="Self.FK_Pet_Visit_Pet_Details" FromRole="Pet_Details" ToRole="Pet_Visit" />
+        </EntityType>
+        <EntityType Name="Pet_Owner">
+          <Key>
+            <PropertyRef Name="IDOwner" />
+          </Key>
+          <Property Name="IDOwner" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Postal" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Id_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoice_Pet_Owner" FromRole="Pet_Owner" ToRole="Invoice" />
+          <NavigationProperty Name="Pet_Details" Relationship="Self.FK_Pet_Details_Pet_Owner" FromRole="Pet_Owner" ToRole="Pet_Details" />
+        </EntityType>
+        <EntityType Name="Pet_Visit">
+          <Key>
+            <PropertyRef Name="IDVisit" />
+          </Key>
+          <Property Name="IDVisit" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VisitDate" Type="DateTime" Precision="0" />
+          <Property Name="VisitTime" Type="Time" Precision="7" />
+          <Property Name="IDPet" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IDVet" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Summary" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pet_Details" Relationship="Self.FK_Pet_Visit_Pet_Details" FromRole="Pet_Visit" ToRole="Pet_Details" />
+          <NavigationProperty Name="Vet" Relationship="Self.FK_Pet_Visit_Vet" FromRole="Pet_Visit" ToRole="Vet" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="IDReceipt" />
+          </Key>
+          <Property Name="IDReceipt" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiptDate" Type="DateTime" Precision="0" />
+          <Property Name="ReceiptAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CaptureDate" Type="DateTime" Precision="0" />
+          <Property Name="IDInvoice" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_Receipt_Invoice" FromRole="Receipt" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Logs" Relationship="Self.FK_Log_Users" FromRole="Users" ToRole="Log" />
+        </EntityType>
+        <EntityType Name="Vet">
+          <Key>
+            <PropertyRef Name="IDVet" />
+          </Key>
+          <Property Name="IDVet" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Id_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="License" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pet_Visit" Relationship="Self.FK_Pet_Visit_Vet" FromRole="Vet" ToRole="Pet_Visit" />
+        </EntityType>
+        <Association Name="FK_Pet_Details_Animal_Breed">
+          <End Role="Animal_Breed" Type="Self.Animal_Breed" Multiplicity="0..1" />
+          <End Role="Pet_Details" Type="Self.Pet_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal_Breed">
+              <PropertyRef Name="IDBreed" />
+            </Principal>
+            <Dependent Role="Pet_Details">
+              <PropertyRef Name="IDBreed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Details_Animal_Type">
+          <End Role="Animal_Type" Type="Self.Animal_Type" Multiplicity="0..1" />
+          <End Role="Pet_Details" Type="Self.Pet_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal_Type">
+              <PropertyRef Name="IDAnimal_Type" />
+            </Principal>
+            <Dependent Role="Pet_Details">
+              <PropertyRef Name="IDAnimal_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Pet_Owner">
+          <End Role="Pet_Owner" Type="Self.Pet_Owner" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pet_Owner">
+              <PropertyRef Name="IDOwner" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="IDOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Invoice">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="IDInvoice" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="IDInvoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Log_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Details_Pet_Owner">
+          <End Role="Pet_Owner" Type="Self.Pet_Owner" Multiplicity="0..1" />
+          <End Role="Pet_Details" Type="Self.Pet_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pet_Owner">
+              <PropertyRef Name="IDOwner" />
+            </Principal>
+            <Dependent Role="Pet_Details">
+              <PropertyRef Name="IDOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Visit_Pet_Details">
+          <End Role="Pet_Details" Type="Self.Pet_Details" Multiplicity="0..1" />
+          <End Role="Pet_Visit" Type="Self.Pet_Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pet_Details">
+              <PropertyRef Name="IDPet" />
+            </Principal>
+            <Dependent Role="Pet_Visit">
+              <PropertyRef Name="IDPet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Visit_Vet">
+          <End Role="Vet" Type="Self.Vet" Multiplicity="0..1" />
+          <End Role="Pet_Visit" Type="Self.Pet_Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vet">
+              <PropertyRef Name="IDVet" />
+            </Principal>
+            <Dependent Role="Pet_Visit">
+              <PropertyRef Name="IDVet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Future_VetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Animal_Breed" EntityType="Self.Animal_Breed" />
+          <EntitySet Name="Animal_Type" EntityType="Self.Animal_Type" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="Pet_Details" EntityType="Self.Pet_Details" />
+          <EntitySet Name="Pet_Owner" EntityType="Self.Pet_Owner" />
+          <EntitySet Name="Pet_Visit" EntityType="Self.Pet_Visit" />
+          <EntitySet Name="Receipts" EntityType="Self.Receipt" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Vets" EntityType="Self.Vet" />
+          <AssociationSet Name="FK_Pet_Details_Animal_Breed" Association="Self.FK_Pet_Details_Animal_Breed">
+            <End Role="Animal_Breed" EntitySet="Animal_Breed" />
+            <End Role="Pet_Details" EntitySet="Pet_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Details_Animal_Type" Association="Self.FK_Pet_Details_Animal_Type">
+            <End Role="Animal_Type" EntitySet="Animal_Type" />
+            <End Role="Pet_Details" EntitySet="Pet_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Pet_Owner" Association="Self.FK_Invoice_Pet_Owner">
+            <End Role="Pet_Owner" EntitySet="Pet_Owner" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Invoice" Association="Self.FK_Receipt_Invoice">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="Receipt" EntitySet="Receipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Log_Users" Association="Self.FK_Log_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Details_Pet_Owner" Association="Self.FK_Pet_Details_Pet_Owner">
+            <End Role="Pet_Owner" EntitySet="Pet_Owner" />
+            <End Role="Pet_Details" EntitySet="Pet_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Visit_Pet_Details" Association="Self.FK_Pet_Visit_Pet_Details">
+            <End Role="Pet_Details" EntitySet="Pet_Details" />
+            <End Role="Pet_Visit" EntitySet="Pet_Visit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Visit_Vet" Association="Self.FK_Pet_Visit_Vet">
+            <End Role="Vet" EntitySet="Vets" />
+            <End Role="Pet_Visit" EntitySet="Pet_Visit" />
+          </AssociationSet>
+          <EntitySet Name="AuditLogs" EntityType="SQLModel.AuditLog" />
+        </EntityContainer>
+        <EntityType Name="AuditLog">
+          <Key>
+            <PropertyRef Name="AuditID" />
+          </Key>
+          <Property Name="AuditID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AreaAccessed" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SQLModelStoreContainer" CdmEntityContainer="Future_VetEntities">
+          <EntitySetMapping Name="Animal_Breed">
+            <EntityTypeMapping TypeName="SQLModel.Animal_Breed">
+              <MappingFragment StoreEntitySet="Animal_Breed">
+                <ScalarProperty Name="IDBreed" ColumnName="IDBreed" />
+                <ScalarProperty Name="Breed" ColumnName="Breed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Animal_Type">
+            <EntityTypeMapping TypeName="SQLModel.Animal_Type">
+              <MappingFragment StoreEntitySet="Animal_Type">
+                <ScalarProperty Name="IDAnimal_Type" ColumnName="IDAnimal_Type" />
+                <ScalarProperty Name="Animal_Type1" ColumnName="Animal_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="SQLModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="IDInvoice" ColumnName="IDInvoice" />
+                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="Receipts" ColumnName="Receipts" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="IDOwner" ColumnName="IDOwner" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="SQLModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="IDLog" ColumnName="IDLog" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pet_Details">
+            <EntityTypeMapping TypeName="SQLModel.Pet_Details">
+              <MappingFragment StoreEntitySet="Pet_Details">
+                <ScalarProperty Name="IDPet" ColumnName="IDPet" />
+                <ScalarProperty Name="Pet_Name" ColumnName="Pet_Name" />
+                <ScalarProperty Name="IDOwner" ColumnName="IDOwner" />
+                <ScalarProperty Name="IDBreed" ColumnName="IDBreed" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="IDAnimal_Type" ColumnName="IDAnimal_Type" />
+                <ScalarProperty Name="TagNumber" ColumnName="TagNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pet_Owner">
+            <EntityTypeMapping TypeName="SQLModel.Pet_Owner">
+              <MappingFragment StoreEntitySet="Pet_Owner">
+                <ScalarProperty Name="IDOwner" ColumnName="IDOwner" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Postal" ColumnName="Postal" />
+                <ScalarProperty Name="Id_Number" ColumnName="Id_Number" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pet_Visit">
+            <EntityTypeMapping TypeName="SQLModel.Pet_Visit">
+              <MappingFragment StoreEntitySet="Pet_Visit">
+                <ScalarProperty Name="IDVisit" ColumnName="IDVisit" />
+                <ScalarProperty Name="VisitDate" ColumnName="VisitDate" />
+                <ScalarProperty Name="VisitTime" ColumnName="VisitTime" />
+                <ScalarProperty Name="IDPet" ColumnName="IDPet" />
+                <ScalarProperty Name="IDVet" ColumnName="IDVet" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipts">
+            <EntityTypeMapping TypeName="SQLModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipt">
+                <ScalarProperty Name="IDReceipt" ColumnName="IDReceipt" />
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+                <ScalarProperty Name="CaptureDate" ColumnName="CaptureDate" />
+                <ScalarProperty Name="IDInvoice" ColumnName="IDInvoice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SQLModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SQLModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vets">
+            <EntityTypeMapping TypeName="SQLModel.Vet">
+              <MappingFragment StoreEntitySet="Vet">
+                <ScalarProperty Name="IDVet" ColumnName="IDVet" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Id_Number" ColumnName="Id_Number" />
+                <ScalarProperty Name="License" ColumnName="License" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditLogs">
+            <EntityTypeMapping TypeName="SQLModel.AuditLog">
+              <MappingFragment StoreEntitySet="AuditLog">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="AreaAccessed" ColumnName="AreaAccessed" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,48 @@
+﻿@model Future_Vet.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3 class="View-title"  style="font-size: 3vw">View selected Employee details</h3>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <input type="button" value="Back" onclick='window.location = "@Url.Action("Index", "Users")";' class="Green-button" />
+    <input type="submit" value="Edit" onclick='window.location = "@Url.Action("Edit", "Users", new { id = Model.IDUser})";' class="Orange-button" />
+</p>

@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Site.css" rel="stylesheet">
+    <script>
+        function htmlbodyHeightUpdate() {
+            var height3 = $(window).height()
+            var height1 = $('.nav').height() + 50
+            height2 = $('.main').height()
+            if (height2 > height3) {
+                $('html').height(Math.max(height1, height3, height2) + 10);
+                $('body').height(Math.max(height1, height3, height2) + 10);
+            }
+            else {
+                $('html').height(Math.max(height1, height3, height2));
+                $('body').height(Math.max(height1, height3, height2));
+            }
+
+        }
+        $(document).ready(function () {
+            htmlbodyHeightUpdate()
+            $(window).resize(function () {
+                htmlbodyHeightUpdate()
+            });
+            $(window).scroll(function () {
+                height2 = $('.main').height()
+                htmlbodyHeightUpdate()
+            });
+        })
+
+
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse sidebar" style="padding-left: 1%" role="navigation" id="SiteMenu" runat="server">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Appointments<span class="caret"></span><span style="font-size: 14px" class="pull-right hidden-xs showopacity glyphicon glyphicon-wrench"></span></a>
+                        <ul class="dropdown-menu forAnimate " role="menu">
+                            <li><a onclick='window.location = "@Url.Action("Create", "Pet_Visit")";'>New Appointment</a></li>
+                            <li><a onclick='window.location = "@Url.Action("Index", "Pet_Visit")";'>View Appointments</a></li>
+
+                        </ul>
+                    </li>
+                    @*<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Finance<span class="caret"></span><span style="font-size: 14px" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a>
+                        <ul class="dropdown-menu forAnimate " role="menu">
+                            <li><a href="#">Ageing</a></li>
+                            <li><a onclick='window.location = "@Url.Action("Index", "Invoices")";'>Invoice</a></li>
+                            <li><a onclick='window.location = "@Url.Action("Index", "Receipts")";'>Payments</a></li>
+
+                        </ul>
+                    </li>*@
+                    <li class="dropdown" id="mAdmin" runat="server" visible="False">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span><span style="font-size: 14px" class="pull-right hidden-xs showopacity glyphicon glyphicon-pencil"></span></a>
+                        <ul class="dropdown-menu forAnimate" role="menu">
+                            <li><a onclick='window.location = "@Url.Action("Index", "Users")";'>Employees</a></li>
+                            <li><a onclick='window.location = "@Url.Action("Index", "Pet_Details")";'>Pet Details</a></li>
+                            <li><a onclick='window.location = "@Url.Action("Index", "Pet_Owner")";'>Pet Owner</a></li>
+                            <li><a onclick='window.location = "@Url.Action("Index", "Vets")";'>Vet Details</a></li>
+                        </ul>
+                    </li>
+                    <li><a onclick='window.location = "@Url.Action("Login", "Login")";'>Logout<span style="font-size: 14px" class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="col-xs-10 container body-content" style="background-color:#fff;border-radius:5px;height:95vh">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

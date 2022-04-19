@@ -1,0 +1,57 @@
+﻿@model Future_Vet.Models.Pet_Visit
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3 class="View-title" style="font-size: 3vw">View selected Pet visit details</h3>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VisitDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VisitDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VisitTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VisitTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pet_Details.Pet_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pet_Details.Pet_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vet.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vet.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <input type="button" value="Back" onclick='window.location = "@Url.Action("Index", "Pet_Visit")";' class="Green-button" />
+    @*Edit method commented out due to user requirements*@
+    @*<input type="submit" value="Edit" onclick='window.location = "@Url.Action("Edit", "Pet_Visit", new { id = Model.IDVisit })";' class="Orange-button" />*@
+</p>

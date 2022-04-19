@@ -1,0 +1,56 @@
+﻿@model Future_Vet.Models.Vet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3 class="View-title" style="font-size: 3vw">View selected Vetenerian details</h3>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.License)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.License)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <input type="button" value="Back" onclick='window.location = "@Url.Action("Index", "Vets")";' class="Green-button" />
+    <input type="submit" value="Edit" onclick='window.location = "@Url.Action("Edit", "Vets", new { id = Model.IDVet })";' class="Orange-button" />
+</p>

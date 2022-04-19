@@ -1,0 +1,99 @@
+﻿@model Future_Vet.Models.Pet_Details
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet">
+
+<h3 class="View-title" style="font-size: 3vw">Edit Pet Details</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Pet_Details</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IDPet)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pet_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div style="float:left;" class="form-group col-xs-12">
+                    @Html.EditorFor(model => model.Pet_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Pet_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.LabelFor(model => model.IDOwner, "Owner", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div style="float:left;" class="form-group col-xs-12">
+                    @Html.DropDownList("IDOwner", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IDOwner, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDBreed, "Breed", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div style="float:left;" class="form-group col-xs-12">
+                    @Html.DropDownList("IDBreed", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IDBreed, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.LabelFor(model => model.Birthdate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div style="float:left;" class="form-group col-xs-12">
+                    <div style="float:left;" class="form-group col-xs-12">
+                        <input type="text" class="form-control" id="datepicker1" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDAnimal_Type, "IDAnimal_Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div style="float:left;" class="form-group col-xs-12">
+                    @Html.DropDownList("IDAnimal_Type", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IDAnimal_Type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.LabelFor(model => model.TagNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div style="float:left;" class="form-group col-xs-12">
+                    @Html.EditorFor(model => model.TagNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TagNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Back" onclick='window.location = "@Url.Action("Index", "Pet_Details")";' class="Green-button" />
+                <input type="submit" value="Save" class="Orange-button" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+
+    <cript type='text/javascript'>
+        $('#datepicker1').datepicker({
+        dateFormat: "yyyy-MM-dd",
+        changeMonth: true,
+        changeYear: true,
+        showOn: "button",
+        buttonText: "<span class='glyphicon glyphicon-calendar'></span>"
+
+        });
+    </cript>
+}

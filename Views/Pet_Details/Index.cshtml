@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Future_Vet.Models.Pet_Details>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3 class="View-title"  style="font-size: 3vw">Registered Pets</h3>
+<button type="submit" class="Green-button" onclick='window.location = "@Url.Action("Create", "Pet_Details")";'>Add a new Pet</button>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Pet_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Birthdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TagNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Animal_Breed.Breed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Animal_Type.Animal_Type1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pet_Owner.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pet_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birthdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TagNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Animal_Breed.Breed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Animal_Type.Animal_Type1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pet_Owner.Name)
+            </td>
+            <td>
+                <input type="submit" value="Edit" onclick='window.location = "@Url.Action("Edit", "Pet_Details", new { id = item.IDPet})";' class="Orange-Small-button" />|
+                <input type="submit" value="Details" onclick='window.location = "@Url.Action("Details", "Pet_Details", new { id = item.IDPet})";' class="Blue-Small-button" />|
+                <input type="submit" value="Delete" onclick='window.location = "@Url.Action("Delete", "Pet_Details", new { id = item.IDPet})";' class="Red-Small-button" />
+            </td>
+        </tr>
+    }
+
+</table>

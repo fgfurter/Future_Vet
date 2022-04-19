@@ -1,0 +1,29 @@
+﻿@model Future_Vet.Models.User
+
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <body style="padding-top:5%">
+        <div class="login-container">
+            <h3 class="login-title">Welcome</h3>
+            <form>
+                <div class="input-group">
+                    <label>Email</label>
+                    @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                </div>
+                <button type="submit" class="login-button">Sign In</button>
+            </form>
+        </div>
+    </body>
+}
+
+

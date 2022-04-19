@@ -1,0 +1,178 @@
+﻿@model Future_Vet.Models.Pet_Visit
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="~/Content/bootstrap-clockpicker.css" rel="stylesheet">
+<link href="~/Content/bootstrap-multiselect.cs" rel="stylesheet">
+<h3 class="View-title" style="font-size: 3vw">Create a new appointment</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="padding-top :2%">
+        <div class="form-group">
+            @Html.LabelFor(model => model.VisitDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                <div style="float:left;" class="form-group col-xs-12">
+                    <input type="text" class="form-control" id="datepicker1" name="datepicker1" />
+                </div>
+            </div>
+
+            @Html.LabelFor(model => model.VisitTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                <div style="float:left;" class="form-group col-xs-12">
+                    <input type="text" id="tmFrom" name="tmFrom" class="form-control" value="08:00" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDPet, "IDPet", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                <div style="float:left;" class="form-group col-xs-12">
+                    @Html.DropDownList("IDPet", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IDPet, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.LabelFor(model => model.IDVet, "IDVet", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                <div style="float:left;" class="form-group col-xs-12">
+                    @Html.DropDownList("IDVet", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IDVet, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Summary, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 msg">
+                <textarea class="notes" runat="server" id="txtComment" name="txtComment" rows="10" value="" style="font-size: small"></textarea>
+                <div class="col-md-2" id="the-count">
+                    <span>Current count:</span>
+                    <span id="current">0</span>
+                    <span id="maximum">/ 1500</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Back" onclick='window.location = "@Url.Action("Index", "Pet_Visit")";' class="Green-button" />
+                <input type="submit" value="Create" class="Orange-button" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+
+
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/bootstrap-clockpicker.js"></script>
+    <script src="~/Scripts/bootstrap-multiselect.js"></script>
+
+    <script type='text/javascript'>
+        $('#datepicker1').datepicker({
+            dateFormat: "yyyy-MM-dd",
+            changeMonth: true,
+            changeYear: true,
+            showOn: "button",
+            buttonText: "<span class='glyphicon glyphicon-calendar'></span>"
+
+        });
+
+        $('#tmFrom').clockpicker({
+            dateFormat: "HH:mm:ss",
+            showOn: "button",
+            buttonText: "<span class='glyphicon glyphicon-clock'></span>"
+
+        });
+
+        $(document).ready(function () {
+            $(".pickerSelectClass").selectpicker();
+
+
+            $("#id_mySelect").selectpicker("refresh");
+            $('.filter-option').css("color", "grey");
+            $('.pickerSelectClass').click(function () {
+
+                //menu option is open
+                if (!$(this).hasClass('open')) {
+                    //Change option's color when the select menu is opened
+                    //Change background color of the whole select menu when is opened
+                    $('.dropdown-menu a').css({
+                        'background': 'none',
+                        'color': 'grey'
+                    });
+                    //Change color when option on hover when select menu is opened
+                    $('.dropdown-menu a').hover(
+                        function () {
+                            $(this).css({
+                                'background': 'none',
+                                'color': 'orange'
+                            });
+                        }, function () {
+                            $(this).css({
+                                'background': 'none',
+                                'color': 'grey'
+                            });
+                        }
+                    );
+
+                    //$('.dropdown-menu').css('background', 'black');
+                    ////close
+                } else {
+
+                }
+
+            });
+        });
+
+        $('#txtComment').keyup(function () {
+
+            var characterCount = $(this).val().length,
+                current = $('#current'),
+                maximum = $('#maximum'),
+                theCount = $('#the-count');
+
+            current.text(characterCount);
+
+
+            /*This isn't entirely necessary, just playin around*/
+            if (characterCount < 300) {
+                current.css('color', '#666');
+            }
+            if (characterCount >= 300 && characterCount < 600) {
+                current.css('color', '#6d5555');
+            }
+            if (characterCount >= 600 && characterCount < 900) {
+                current.css('color', '#793535');
+            }
+            if (characterCount >= 900 && characterCount < 1200) {
+                current.css('color', '#841c1c');
+            }
+            if (characterCount >= 1200 && characterCount < 1500) {
+                current.css('color', '#8f0001');
+            }
+
+            if (characterCount >= 1500) {
+                maximum.css('color', '#8f0001');
+                current.css('color', '#8f0001');
+                theCount.css('font-weight', 'bold');
+            } else {
+                maximum.css('color', '#666');
+                theCount.css('font-weight', 'normal');
+            }
+
+
+        });
+
+    </script>
+}
+
